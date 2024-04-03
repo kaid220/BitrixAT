@@ -1,6 +1,7 @@
 package Bitrix
 
 import Bitrix.page.AutorizePage
+import Bitrix.page.DealPage
 import geb.spock.GebSpec
 import org.openqa.selenium.WebDriver
 import spock.lang.Shared
@@ -32,6 +33,18 @@ class BitrixSpec extends GebSpec{
                 Поле_Пароль.value()==пароль}
             Кнопка_Далее.click()
         }
+        at DealPage
     }
+    def перейтиПоМеню(String путь){
+        String[] пути = путь.split('->')
+        DealPage.ЭлементМенюПервогоУровня(пути[0]).click()
+        if(пути.size()>1){
+            waitFor {DealPage.ЭлементМенюПервогоУровня(пути[1]).displayed}
+            DealPage.ЭлементМенюПервогоУровня(пути[1]).click()
+        }
+    }
+
+
+
 
 }

@@ -1,7 +1,7 @@
 import org.openqa.selenium.chrome.ChromeDriver
 
 
-waiting{ timeout=20}
+waiting{ timeout=60}
 
 
 environments{
