@@ -1,0 +1,4 @@
+<ReportPortalLog4j2Appender name="ReportPortalAppender">
+    <PatternLayout
+            pattern="%d [%t] %-5level %logger{36} - %msg%n%throwable"  charset="UTF-8"/>
+</ReportPortalLog4j2Appender>

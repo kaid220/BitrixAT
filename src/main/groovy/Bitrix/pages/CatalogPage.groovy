@@ -1,4 +1,4 @@
-package Bitrix.page
+package Bitrix.pages
 
 import Bitrix.BitrixPage
 

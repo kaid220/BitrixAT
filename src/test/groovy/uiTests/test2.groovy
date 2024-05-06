@@ -1,3 +1,5 @@
+package uiTests
+
 import Bitrix.BitrixSpec
 
 class test2 extends BitrixSpec{
