@@ -12,8 +12,10 @@ plugins {
     id 'idea'
 }
 
-compileGroovy.options.encoding='UTF-8'
-compileTestGroovy.options.encoding = 'UTF-8'
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+compileGroovy.options.encoding ='UTF-8'
+compileTestGroovy.options.encoding='UTF-8'
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -30,7 +32,8 @@ dependencies {
     //use GEB
     implementation 'org.gebish:geb-spock:7.0'
     //use logger
-    implementation 'log4j:log4j:1.2.17'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
     //use restAssured
     implementation 'io.rest-assured:rest-assured:5.4.0'
 

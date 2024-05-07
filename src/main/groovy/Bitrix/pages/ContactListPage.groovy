@@ -8,6 +8,6 @@ class ContactListPage extends BitrixPage{
     String nameObj="contact/list"
     static content = {
         ПанельИнструментовКонтакты{ module new ПанельИнструментовКонтакты() }
-        Апплет_СписокКонтактов{module new АпплетСписокКонтактов()}
+        АпплетСписокКонтактов{module new АпплетСписокКонтактов()}
     }
 }

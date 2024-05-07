@@ -1,0 +1,118 @@
+package uiTests
+
+
+import Bitrix.BitrixSpec
+import Bitrix.Config
+import Bitrix.pages.ContactDetailsPage
+import Bitrix.pages.ContactListPage
+import spock.lang.Shared
+import spock.lang.Stepwise
+import spock.lang.Title
+
+@Title('Тест 1: Создание контакта')
+@Stepwise
+class Test1 extends BitrixSpec{
+
+    def "Шаг 1: Выполнить вход в Битрикс24"() {
+        given:
+        выполнитьВходВБитрикс(Config.getProperty("userLogin1"), Config.getProperty("userPassword1"))
+        logger.info("ОР: Осуществлен вход в Битрикс24")
+    }
+    def "Шаг 2: Перейти по меню Клиенты - Контакты"(){
+        given:
+        перейтиПоМеню('Клиенты->Контакты')
+        at ContactListPage
+        logger.info("ОР: Открылась страница 'Контакты'")
+    }
+    @Shared Integer колвоКонтактов
+    def "Шаг 3: Зафиксировать текущее количество контактов"(){
+        given:
+        waitFor {page(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed}
+        for(int i=0;i<10 && at(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed;i++){
+            waitFor { page(ContactListPage).ПанельИнструментовКонтакты.КнопкаСоздать.displayed}
+            обновитьСтраницуБраузера()
+            waitFor { at(ContactListPage).ПанельИнструментовКонтакты.КнопкаСоздать.displayed}
+            page(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.click()
+            sleep(5000)
+            }
+            waitFor { !page(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed}
+            колвоКонтактов = page(ContactListPage).АпплетСписокКонтактов.ПолеКоличествоКонтактов.text().split(' ')[page(ContactListPage).АпплетСписокКонтактов.ПолеКоличествоКонтактов.text().split(' ').size()-1] as Integer
+            assert колвоКонтактов!=null
+        logger.info("Количество контактов ='$колвоКонтактов'")
+        logger.info("ОР: Значение зафиксированно")
+    }
+    def "Шаг 4: Нажать на кнопку 'Создать'"(){
+        given:
+        at(ContactListPage).ПанельИнструментовКонтакты.КнопкаСоздать.click()
+        at ContactDetailsPage
+        assert page(ContactDetailsPage).Диалог_СозданиеКонтакта.displayed
+        logger.info("ОР: Открылась форма создания контакта")
+    }
+
+    def "Шаг 5: Заполнить поле: Обращение"(){
+          given:
+          at(ContactDetailsPage).Диалог_СозданиеКонтакта.with {
+              withFrame(IFrame) {
+                  at(ContactDetailsPage).Диалог_СозданиеКонтакта.заполнитьПолеОбращение('г-н')
+              }
+          }
+          logger.info("ОР: Поле заполнено")
+    }
+
+    def "Шаг 6: Заполнить поле: Фамилия"(){
+        given:
+        page(ContactDetailsPage).Диалог_СозданиеКонтакта.with {
+            заполнитьПолеФамилия()
+        }
+        logger.info("ОР: Поле заполнено")
+    }
+
+    def "Шаг 7: Заполнить поле: Отчество"(){
+        given:
+        at(ContactDetailsPage).Диалог_СозданиеКонтакта.with {
+            заполнитьПолеОтчество()
+        }
+        logger.info("ОР: Поле заполнено")
+    }
+
+    def "Шаг 8: Заполнить поле: Номер телефона"(){
+        given:
+        page(ContactDetailsPage).Диалог_СозданиеКонтакта.with {
+            заполнитьПолеНомерТелефона()
+        }
+        logger.info("ОР: Поле заполнено")
+    }
+
+
+    def "Шаг 9: Заполнить поле: Дата Рождения"(){
+        given:
+        page(ContactDetailsPage).Диалог_СозданиеКонтакта.with {
+            заполнитьПолеДатаРождения()
+        }
+        logger.info("ОР: Поле заполнено")
+    }
+
+    def "Шаг 10: Нажать на кнопку Сохранить"(){
+        given:
+        withFrame(page(ContactDetailsPage).Диалог_СозданиеКонтакта.IFrame) {
+            page(ContactDetailsPage).Диалог_СозданиеКонтакта.сохранитьЗапись()
+            waitFor { page(ContactDetailsPage).Диалог_СозданиеКонтакта.СообщениеОбОбязательностиПоляИмя.displayed }
+        }
+        logger.info("ОР: Отобразилось сообщение о обязательности поля Имя")
+    }
+    def "Шаг 11: Заполнить поле: Имя"(){
+        given:
+        at(ContactDetailsPage).Диалог_СозданиеКонтакта.with {
+            заполнитьПолеИмя()
+        }
+        logger.info("ОР: Поле заполнено")
+    }
+    def "Шаг 12: Нажать на кнопку Сохранить"(){
+        given:
+            withFrame(page(ContactDetailsPage).Диалог_СозданиеКонтакта.IFrame) {
+                page(ContactDetailsPage).Диалог_СозданиеКонтакта.сохранитьЗапись()
+            }
+            assert !page(ContactDetailsPage).Диалог_СозданиеКонтакта.displayed
+        logger.info("ОР: Диалог Создания Контакта закрыт")
+    }
+}

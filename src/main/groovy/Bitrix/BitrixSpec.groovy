@@ -3,16 +3,17 @@ package Bitrix
 import Bitrix.pages.AutorizePage
 import Bitrix.pages.DealPage
 import geb.spock.GebSpec
-import org.apache.log4j.*
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.openqa.selenium.WebDriver
 import spock.lang.Shared
 
 class BitrixSpec extends GebSpec{
 
     @Shared WebDriver driver
-    @Shared protected static Logger logger
+    @Shared protected static  Logger logger
     def setupSpec(){
-        logger= Logger.getLogger(this.getClass().getName())
+        logger = LogManager.getLogger(this.getClass())
         driver = getNewDriver()
     }
     def cleanupSpec(){
@@ -30,7 +31,7 @@ class BitrixSpec extends GebSpec{
         at(AutorizePage).with {
             logger.info("Перешли на страницу авторизации")
             waitFor {Поле_Логин.value(логин)
-            Поле_Логин.value()==логин}
+                Поле_Логин.value()==логин}
             logger.info("Заполнили поле логин значением $логин")
             Кнопка_Далее.click()
             waitFor {Поле_Пароль.displayed}
@@ -54,7 +55,12 @@ class BitrixSpec extends GebSpec{
         }
     }
 
-
+    def обновитьСтраницуБраузера(){
+        logger.info('Производим обновление страницы средствами webdriver')
+        sleep(2000)
+        browser.driver.navigate().refresh()
+        sleep(2000)
+    }
 
 
 }

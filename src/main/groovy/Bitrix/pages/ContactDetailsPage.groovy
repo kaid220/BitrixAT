@@ -8,5 +8,6 @@ class ContactDetailsPage extends BitrixPage{
     String nameObj="contact/details"
     static content = {
         Диалог_СозданиеКонтакта{ module new ДиалогСозданияКонтакта()}
+
     }
 }
