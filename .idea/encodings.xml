@@ -3,7 +3,7 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/build.gradle" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/groovy/Bitrix/BitrixSpec.groovy" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/groovy/uiTests/Test1.groovy" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/groovy/Test1.groovy" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

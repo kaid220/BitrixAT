@@ -4,10 +4,18 @@
         <Console name="stdout">
             <PatternLayout charset="UTF-8" pattern="%d [%c{1}] %-5level- %msg%n%throwable"/>
         </Console>
+        <JDBC name="bitrixat" tableName="logtest">
+            <ConnectionFactory class="Bitrix.DataBase" method="createConnection"/>
+            <Column name="eventDate"  pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}"/>
+            <Column name="level" pattern="%level"/>
+            <Column name="logger" pattern="%logger"/>
+            <Column name="message" pattern="%message"/>
+        </JDBC>
     </Appenders>
     <Loggers>
      <Root level="ALL">
          <AppenderRef ref="stdout"/>
+         <AppenderRef ref="bitrixat"/>
     </Root>
     </Loggers>
 </Configuration>

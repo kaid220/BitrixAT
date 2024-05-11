@@ -5,5 +5,5 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
 class DialogBase extends  Module{
-    Logger logger =  LogManager.getLogger(this.getClass())
+    Logger logger =  LogManager.getLogger(BitrixSpec.logger.getName())
 }
