@@ -27,7 +27,8 @@ pipeline {
                 stage('Running') {
                         steps {
                                 script {
-                                        echo "booba"
+                                        echo "Start autotests"
+                                        bat '.\\gradlew.bat test'
                                 }
                         }
                 }

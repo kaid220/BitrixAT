@@ -63,6 +63,18 @@ List<String> selectTests(){
     }
 }
 
+List<String> selectFailedTests(){
+    List<String> testNumbers
+    try {
+        Statement sql = createConnection().createStatement()
+        testNumbers = sql.executeQuery("SELECT testName FROM autotests WHERE lastStatus='FAILED' ORDER BY idtests DESC")
+        testNumbers
+    }
+    catch (Exception e){
+        e.printStackTrace()
+    }
+}
+
 static Connection createConnection(){
     Connection connection=null
     final String dbURL = "jdbc:mysql://localhost:3306/bitrixat?serverTimezone=UTC&useSSL=false"
