@@ -10,7 +10,7 @@ pipeline {
                         steps {
                                 script {
                                         echo "Start creating localSetting.properties"
-                                        writeFile file: 'localSetting.properties', text: """
+                                        writeFile file: 'src\\test\\resources\\localSetting.properties', text: """
                     userLogin1 = xifural75@yandex.ru
                     userPassword1 =${params.jenkinsTestUserPassword1}
                     userLogin2 = xifural76@yandex.ru
