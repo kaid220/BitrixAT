@@ -1,4 +1,4 @@
-pipline {
+pipeline {
         agent any
         parameters {
                 string(name: 'jenkinsBranch_name')
