@@ -9,7 +9,7 @@ pipeline {
                 stage('LocalSetting Creator') {
                         steps {
                                 script {
-                                        echo "Запущено создание файла localSetting.properties"
+                                        echo "Start creating localSetting.properties"
                                         writeFile file: 'localSetting.properties', text: """
                     userLogin1 = xifural75@yandex.ru
                     userPassword1 =${params.jenkinsTestUserPassword1}
