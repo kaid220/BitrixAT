@@ -77,7 +77,7 @@ class BitrixSpec extends GebSpec{
     }
 
 
-    def выполнитьВходВБитрикс(String логин,String пароль){
+    boolean выполнитьВходВБитрикс(String логин,String пароль){
         try {
             if (!browser.driver) driver = getNewDriver()
             go 'https://b24-wqf2lv.bitrix24.ru'
@@ -138,7 +138,7 @@ class BitrixSpec extends GebSpec{
 
     Пользователь получитьСвободногоПользователя(){
         logger.info('Осуществляется поиск свободного пользователя')
-        String логин = DataBase.doSelectQuery("SELECT Employee FROM users WHERE isUse='0'").get(0).get('Employee')
+        String логин = DataBase.doSelectQuery("SELECT employee FROM users WHERE isUse='0'").get(0).get('employee')
         if (логин==''||логин==null) throw new Exception("Отсутствуют свободные пользователи")
         logger.info("Занимаем пользователя в БД")
         DataBase.doDbScript("UPDATE users SET isUse = '1' WHERE (`Employee` = '$логин')")
