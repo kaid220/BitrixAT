@@ -24,5 +24,6 @@ pipeline {
                                 }
                         }
                 }
+                stage('Running')
         }
 }
