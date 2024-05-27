@@ -1,23 +1,11 @@
 pipeline {
         agent any
         parameters {
-                string(name: 'jenkinsBranch_name')
                 string(name: 'jenkinsTestUserPassword1')
                 string(name: 'jenkinsTestUserPassword2')
                 string(name: 'isRemote')
         }
         stages {
-                stage('Checkout to branch') {
-                        steps {
-                                script {
-                                        def currentBranch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim
-                                        def targetBranch = "${params.jenkinsBranch_name}"
-                                        echo "Текущая ветка = '$currentBranch'"
-                                        echo "Необходимая ветка = '$targetBranch'"
-                                        if (currentBranch != targetBranch) git branch: targetBranch, url: "https://github.com/kaid220/BitrixAT.git"
-                                }
-                        }
-                }
                 stage('LocalSetting Creator') {
                         steps {
                                 script {
