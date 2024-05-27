@@ -20,7 +20,7 @@ pipeline {
                     dataBaseRootPassword=rootPassword
                     isRemote=${params.isRemote}"""
                                         archiveArtifacts 'src\\test\\resources\\localSetting.properties'
-                                        sh 'cat localSetting.properties'
+                                        sh 'cat src\\test\\resources\\localSetting.properties'
                                 }
                         }
                 }
