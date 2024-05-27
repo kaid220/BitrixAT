@@ -24,8 +24,12 @@ pipeline {
                                 }
                         }
                 }
-                stage('Running'){
-                        echo "booba"
+                stage('Running') {
+                        steps {
+                                script {
+                                        echo "booba"
+                                }
+                        }
                 }
         }
 }
