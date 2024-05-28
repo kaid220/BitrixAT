@@ -28,7 +28,7 @@ pipeline {
                         steps {
                                 script {
                                         echo "Start autotests"
-                                        bat '.\\gradlew.bat selectTests'
+                                        bat '.\\gradlew.bat test'
                                 }
                         }
                 }
