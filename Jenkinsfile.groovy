@@ -28,9 +28,14 @@ pipeline {
                         steps {
                                 script {
                                         echo "Start autotests"
-                                        bat '.\\gradlew.bat test'
+                                        bat '.\\gradlew.bat selectTests'
                                 }
                         }
+                }
+        }
+        post{
+                allways{
+                        allure allowEmptyResults: true, results:[[$class:'AllureResultPublisher',path:'allure-results']]
                 }
         }
 }
