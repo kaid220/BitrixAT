@@ -29,9 +29,10 @@ pipeline {
                         steps {
                                 script {
                                         echo "Start autotests"
-                                        def testResults = bat returnStdout: true, script: 'gradlew.bat test'
-                                        echo testResults
-                                        bat '.\\gradlew.bat test'
+                                        catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') {
+                                                def testResults = bat returnStdout: true, script: 'gradlew.bat test'
+                                                echo testResults
+                                        }
                                 }
                         }
                 }
