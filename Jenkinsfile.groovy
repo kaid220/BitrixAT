@@ -25,15 +25,12 @@ pipeline {
                         }
                 }
 
-                stage('Ru tests') {
+                stage('Run tests') {
                         steps {
-                                script {
-                                        echo "Start autotests"
-                                        catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') {
-                                                bat gradlew.bat test
-                                                echo testResults
-                                        }
-                                }
+                               echo "Start autotests"
+                               bat returnStdout: true, script: 'gradlew.bat test'
+                               allure includeProperties: false, jvmArgs: ['-Dallure.results.directory=allure-results'], reportBuildPolicy: 'ALWAYS'
+
                         }
                 }
                 stage('Run failed tests'){
