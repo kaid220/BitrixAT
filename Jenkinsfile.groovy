@@ -27,18 +27,21 @@ pipeline {
 
                 stage('Run tests') {
                         steps {
-                               echo "Start autotests"
-                               bat returnStdout: true, script: 'gradlew.bat test'
-                               allure includeProperties: false, jvmArgs: ['-Dallure.results.directory=allure-results'], reportBuildPolicy: 'ALWAYS'
-
+                                script {
+                                        echo "Start autotests"
+                                        bat returnStdout: true, script: 'gradlew.bat test'
+                                        allure includeProperties: false, jvmArgs: ['-Dallure.results.directory=allure-results'], reportBuildPolicy: 'ALWAYS'
+                                }
                         }
                 }
                 stage('Run failed tests'){
                         when{
                                 expression { currentBuild.result == 'FAILURE'}
                         }
-                        steps{
-                                bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'
+                        steps {
+                                script {
+                                        bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'
+                                }
                         }
                 }
                 stage('Reports'){
