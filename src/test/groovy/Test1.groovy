@@ -145,6 +145,7 @@ class Test1 extends BitrixSpec{
     def "Шаг 13: Нажать кнопку 'Закрыть' на карточке контакта"(){
         given:
         waitFor {page(ContactDetailsPage).Апплет_КарточкаКонтакта.Кнопка_ЗакрытьКарточку.click()
+            page(ContactDetailsPage).Апплет_КарточкаКонтакта.Кнопка_ЗакрытьКарточку.click()
         at(ContactListPage).АпплетСписокКонтактов.Таблица.displayed}
         logger.info("ОР: Вернулись на страницу со списком контактов")
         stepPassed=true
