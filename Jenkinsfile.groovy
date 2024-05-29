@@ -51,9 +51,9 @@ pipeline {
                 always{
                         echo 'Pipeline is complete'
                         emailext (
-                                subject: "CMXQA.TESTS Отчет прогона тестов [${env.BUILD_NUMBER}] ",
+                                subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
                                 body:"""Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-                                to: "${env.mailRecipients}"
+                                to: "xifural75@yandex.ru"
                         )
                 }
         }
