@@ -30,7 +30,7 @@ pipeline {
                                 script {
                                         echo "Start autotests"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
-                                        allure includeProperties: false, jvmArgs: ['-Dallure.results.directory=allure-results'], reportBuildPolicy: 'ALWAYS'
+                                        bat 'gradlew.bat allureReport'
                                 }
                         }
                 }
