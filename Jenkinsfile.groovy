@@ -36,5 +36,25 @@ pipeline {
                                 }
                         }
                 }
+                stage('Reports'){
+                        steps{
+                                allure([includeProperties: true,
+                                        jdk: '',
+                                        properties: [],
+                                        reportBuildPolicy: 'ALWAYS',
+                                        results: [[path: '**/allure-results']]
+                                ])
+                        }
+                }
+        }
+        post{
+                always{
+                        echo 'Pipeline is complete'
+                        emailext (
+                                subject: "CMXQA.TESTS Отчет прогона тестов [${env.BUILD_NUMBER}] ",
+                                body:"""Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+                                to: "${env.mailRecipients}"
+                        )
+                }
         }
 }
