@@ -35,14 +35,13 @@ pipeline {
                         }
                 }
                 stage('Run failed tests'){
-                        script {
-                                echo "${currentBuild.result}"
-                        }
-                        when{
+
+                       /* when{
                                 expression { currentBuild.result == 'FAILURE'}
-                        }
+                        }*/
                         steps {
                                 script {
+                                        echo "${currentBuild.result}"
                                         bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'
                                 }
                         }
