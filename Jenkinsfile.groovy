@@ -24,6 +24,11 @@ pipeline {
                                 }
                         }
                 }
+                stage('Build'){
+                        steps{
+                                bat 'gradlew.bat build'
+                        }
+                }
                 stage('Running') {
                         steps {
                                 script {
@@ -31,11 +36,6 @@ pipeline {
                                         bat '.\\gradlew.bat test'
                                 }
                         }
-                }
-        }
-        post{
-                allways{
-                        allure includeProperties: false, jdk: '17.0', results: [[path: 'allure-results']]
                 }
         }
 }
