@@ -12,20 +12,19 @@ import java.sql.Statement
 
 class DataBase {
 
-    public static final String dbURL = "jdbc:mysql://localhost:3306/bitrixat?serverTimezone=UTC&useSSL=false"
+    public static final String dbURL = "jdbc:mysql://localhost:3306/bitrixat?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false"
     public static final String userName = Config.getProperty("dataBaseUserName")
     public static final String userPass = Config.getProperty("dataBaseRootPassword")
     private static Logger logger = LogManager.getLogger(BitrixSpec.logger.getName())
      static Connection createConnection(){
-        Connection connection=null
         try {
-            connection = DriverManager.getConnection(dbURL,userName,userPass)
-
+            Connection connection = DriverManager.getConnection(dbURL,userName,userPass)
+            connection
         }
         catch (SQLException e){
             e.printStackTrace()
         }
-        connection
+
     }
 
     static boolean doDbScript(String query){

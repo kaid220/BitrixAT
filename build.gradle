@@ -54,55 +54,6 @@ test{ useJUnitPlatform()
    maxParallelForks = 2
 systemProperty('file.encoding','UTF-8')}
 
-List<String> selectTests(){
-    List<String> testNumbers
-    try {
-        Statement sql = createConnection().createStatement()
-        testNumbers = sql.executeQuery("SELECT testName FROM autotests ORDER BY idtests DESC")
-        testNumbers
-    }
-    catch (Exception e){
-        e.printStackTrace()
-    }
-}
 
-task runTests(){
-    doLast {
-        List<String> listOfTests = selectTests()
-    }
-}
-
-List<String> selectFailedTests(){
-    List<String> testNumbers
-    try {
-        Statement sql = createConnection().createStatement()
-        testNumbers = sql.executeQuery("SELECT testName FROM autotests WHERE lastStatus='FAILED' ORDER BY idtests DESC")
-        testNumbers
-    }
-    catch (Exception e){
-        e.printStackTrace()
-    }
-}
-
-static Connection createConnection(){
-    final String dbURL = "jdbc:mysql://localhost:3306/bitrixat?serverTimezone=UTC&useSSL=false"
-    final String userName = "root"
-    final String userPass = "rootPassword"
-    try {
-
-        Connection connection = DriverManager.getConnection(dbURL,userName,userPass)
-        connection
-    }
-    catch (SQLException e){
-        e.printStackTrace()
-    }
-}
-
-static String getLocalProperty(String value){
-    Properties properties = new Properties()
-    properties.load(new File("src/test/resources/localSetting.properties"))
-
-
-}
 
 

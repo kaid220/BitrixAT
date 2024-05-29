@@ -35,7 +35,7 @@ pipeline {
         }
         post{
                 allways{
-                        allure allowEmptyResults: true, results:[[$class:'AllureResultPublisher',path:'allure-results']]
+                        allure includeProperties: false, jdk: '17.0', results: [[path: 'allure-results']]
                 }
         }
 }
