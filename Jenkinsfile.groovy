@@ -30,7 +30,7 @@ pipeline {
                                 script {
                                         echo "Start autotests"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
-                                        archiveArtifacts 'build\\reports\\tests\\test'
+                                        archiveArtifacts artifacts: 'build\\reports\\tests\\test\\**', targetPath: 'runAllTests'
                                 }
                         }
                 }
@@ -43,7 +43,7 @@ pipeline {
                                 script {
                                         echo "${currentBuild.result}"
                                         bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'
-                                        archiveArtifacts 'build\\reports\\tests\\test'
+                                        archiveArtifacts artifacts: 'build\\reports\\tests\\test\\**', targetPath: 'runFailedTests'
                                 }
                         }
                 }
@@ -52,8 +52,8 @@ pipeline {
         post{
                 always{
                         echo 'Pipeline is complete'
-                        echo """subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
-                                body:""Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"",
+                        echo """subject: "BitrixAT Отчет прогона тестов [${BUILD_NUMBER}] ",
+                                body:""Подробный allure-отчет: "<a href='${BUILD_URL}allure/'>${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>"",
                                 to: "xifural75@yandex.ru" """
                         emailext (
                                 subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
