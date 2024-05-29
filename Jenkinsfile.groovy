@@ -29,7 +29,7 @@ pipeline {
                         steps {
                                 script {
                                         echo "Start autotests"
-                                        bat returnStdout: true, script: 'gradlew.bat test'
+                                        catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
                                         allure includeProperties: false, jvmArgs: ['-Dallure.results.directory=allure-results'], reportBuildPolicy: 'ALWAYS'
                                 }
                         }
@@ -44,14 +44,11 @@ pipeline {
                                 }
                         }
                 }
-                stage('Reports'){
-                        steps{
-                                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-                        }
-                }
+
         }
         post{
                 always{
+                        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
                         echo 'Pipeline is complete'
                         echo """subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
                                 body:""Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"",
