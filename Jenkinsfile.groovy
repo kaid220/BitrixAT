@@ -41,7 +41,7 @@ pipeline {
                         }*/
                         steps {
                                 script {
-                                        echo "${currentBuild.result}"
+                                        echo "Run failed tests"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE'){  bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'}
                                         archiveArtifacts  'build\\reports\\tests\\test\\**'
                                 }
