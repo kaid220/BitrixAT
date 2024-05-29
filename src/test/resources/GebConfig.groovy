@@ -23,7 +23,8 @@ environments{
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             /* How to add test badge */
             put("name", this.getClass().getName().toString());
-
+            put("enableVNC", true);
+            put("maxInstances", 5)
             /* How to set session timeout */
             put("sessionTimeout", "15m");
 
@@ -34,7 +35,7 @@ environments{
 
             /* How to add "trash" button */
             put("labels", new HashMap<String, Object>() {{
-                put("manual", "true");
+                put("manual", "false");
             }});
 
             /* How to enable video recording */
