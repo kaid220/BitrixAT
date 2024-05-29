@@ -45,6 +45,9 @@ pipeline {
         post{
                 always{
                         echo 'Pipeline is complete'
+                        echo """subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
+                                body:""Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"",
+                                to: "xifural75@yandex.ru" """
                         emailext (
                                 subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
                                 body:"""Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
