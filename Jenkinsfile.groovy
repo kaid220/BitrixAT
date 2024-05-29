@@ -30,7 +30,7 @@ pipeline {
                                 script {
                                         echo "Start autotests"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
-                                        archiveArtifacts  'build\\reports\\tests\\test\\**'
+                                       // archiveArtifacts  'build\\reports\\tests\\test\\**'
                                 }
                         }
                 }
