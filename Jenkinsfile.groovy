@@ -36,9 +36,9 @@ pipeline {
                 }
                 stage('Run failed tests'){
 
-                        when{
+                       /* when{
                                 previousStageFailed()
-                        }
+                        }*/
                         steps {
                                 script {
                                         echo "${currentBuild.result}"
