@@ -24,15 +24,13 @@ pipeline {
                                 }
                         }
                 }
-                stage('Build'){
-                        steps{
-                                bat 'gradlew.bat build'
-                        }
-                }
+
                 stage('Running') {
                         steps {
                                 script {
                                         echo "Start autotests"
+                                        def testResults = bat returnStdout: true, script: 'gradlew.bat test'
+                                        echo testResults
                                         bat '.\\gradlew.bat test'
                                 }
                         }
