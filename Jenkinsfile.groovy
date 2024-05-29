@@ -35,6 +35,7 @@ pipeline {
                         }
                 }
                 stage('Run failed tests'){
+                        echo currentBuild.result
                         when{
                                 expression { currentBuild.result == 'FAILURE'}
                         }
