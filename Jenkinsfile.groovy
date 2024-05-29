@@ -30,20 +30,20 @@ pipeline {
                                 script {
                                         echo "Start autotests"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
-                                        archiveArtifacts artifacts: 'build\\reports\\tests\\test\\**', targetPath: 'runAllTests'
+                                        archiveArtifacts  'build\\reports\\tests\\test\\**'
                                 }
                         }
                 }
                 stage('Run failed tests'){
 
-                       /* when{
-                                expression { currentBuild.result == 'FAILURE'}
-                        }*/
+                        when{
+                                previousStageFailed()
+                        }
                         steps {
                                 script {
                                         echo "${currentBuild.result}"
                                         bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'
-                                        archiveArtifacts artifacts: 'build\\reports\\tests\\test\\**', targetPath: 'runFailedTests'
+                                        archiveArtifacts  'build\\reports\\tests\\test\\**'
                                 }
                         }
                 }
