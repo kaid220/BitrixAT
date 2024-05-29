@@ -52,8 +52,8 @@ pipeline {
         post{
                 always{
                         echo 'Pipeline is complete'
-                        echo """subject: "BitrixAT Отчет прогона тестов [${BUILD_NUMBER}] ",
-                                body:""Подробный allure-отчет: "<a href='${BUILD_URL}allure/'>${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>"",
+                        echo """subject: "BitrixAT number of build [${BUILD_NUMBER}] ",
+                                body:" allure-отчет: "<a href='${BUILD_URL}allure/'>${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>"",
                                 to: "xifural75@yandex.ru" """
                         emailext (
                                 subject: "BitrixAT Отчет прогона тестов [${env.BUILD_NUMBER}] ",
