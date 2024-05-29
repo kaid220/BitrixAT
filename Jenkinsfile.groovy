@@ -25,7 +25,7 @@ pipeline {
                         }
                 }
 
-                stage('Running') {
+                stage('Ru tests') {
                         steps {
                                 script {
                                         echo "Start autotests"
@@ -34,6 +34,14 @@ pipeline {
                                                 echo testResults
                                         }
                                 }
+                        }
+                }
+                stage('Run failed tests'){
+                        when{
+                                expression { currentBuild.result == 'FAILURE'}
+                        }
+                        steps{
+                                bat returnStdout: true, script: 'gradlew.bat test --rerun-tasks'
                         }
                 }
                 stage('Reports'){
