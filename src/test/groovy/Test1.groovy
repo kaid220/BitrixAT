@@ -136,6 +136,7 @@ class Test1 extends BitrixSpec{
                 page(ContactDetailsPage).Апплет_КарточкаКонтакта.Диалог_СозданиеКонтакта.сохранитьЗапись()
             }
             assert page(ContactDetailsPage).Апплет_КарточкаКонтакта.Кнопка_ЗакрытьКарточку.displayed
+        sleep(3000)
         logger.info("ОР: Диалог Создания Контакта закрыт")
         stepPassed=true
 
