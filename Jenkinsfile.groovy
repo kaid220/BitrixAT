@@ -28,7 +28,7 @@ pipeline {
                 stage('Run tests') {
                         steps {
                                 script {
-                                        echo "Start autotests"
+                                        echo "Start all tests running"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
                                        // archiveArtifacts  'build\\reports\\tests\\test\\**'
                                 }
