@@ -34,19 +34,19 @@ pipeline {
                                 }
                         }
                 }
-                stage('Run failed tests'){
+                /*stage('Run failed tests'){
 
-                       /* when{
+                        when{
                                 previousStageFailed()
-                        }*/
+                        }
                         steps {
                                 script {
                                         echo "Run failed tests"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE'){  bat returnStdout: true, script: 'gradlew.bat failedTests'}
-                                        archiveArtifacts  'build\\reports\\tests\\test\\**'
+                                        junit stdioRetention: '', testResults: 'build\\test-results\\test\\*.xml'
                                 }
                         }
-                }
+                }*/
 
         }
         post{
@@ -55,6 +55,7 @@ pipeline {
                         echo """subject: "BitrixAT number of build [${BUILD_NUMBER}] ",
                                 body:" allure-report: "<a href='${BUILD_URL}allure/'>${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>"",
                                 to: "xifural75@yandex.ru" """
+                        mail bcc:"""allure-report: "<a href='${BUILD_URL}allure/'>${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>""", subject: "BitrixAT number of build [${BUILD_NUMBER}]", to: 'xifural75@yandex.ru'
                         emailext (
                                 subject: "BitrixAT number of build [${BUILD_NUMBER}]",
                                 body:""" allure-report: "<a href='${BUILD_URL}allure/'>${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>"",""",
