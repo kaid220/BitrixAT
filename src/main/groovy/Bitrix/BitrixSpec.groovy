@@ -25,6 +25,7 @@ class BitrixSpec extends GebSpec{
         logger = LogManager.getLogger(this.getClass())
         датаЗапуска = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))
         logger.info("Запущен тест: $запущенныйТест")
+        for(int i=0;i<10&&driver==null;i++)
         driver = getNewDriver()
         созданиеИлиОбновлениеЗаписиОТесте('start')
     }
