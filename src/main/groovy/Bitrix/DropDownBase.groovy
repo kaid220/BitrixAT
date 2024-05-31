@@ -4,7 +4,7 @@ import geb.Module
 import geb.navigator.Navigator
 import org.openqa.selenium.By
 
-class ПолеСоСпискомBase extends Module{
+class DropDownBase extends Module{
     /**
      * обязательное поле
      * испульзуется для поиска input элемента выпадающего списка

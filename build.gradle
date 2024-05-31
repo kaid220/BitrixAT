@@ -47,13 +47,13 @@ dependencies {
     //use mySqlConnector
     implementation 'mysql:mysql-connector-java:8.0.11'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'io.qameta.allure:allure-spock:2.16.0'
+    //implementation 'io.qameta.allure:allure-spock:2.16.0'
 }
 
 test{ useJUnitPlatform()
    maxParallelForks = 3
 systemProperty('file.encoding','UTF-8')
-testLogging.showStandardStreams = true}
+}
 
 
 

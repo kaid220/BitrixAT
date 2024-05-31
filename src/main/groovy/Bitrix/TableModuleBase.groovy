@@ -5,9 +5,9 @@ import geb.navigator.DefaultNavigator
 import geb.navigator.Navigator
 import org.openqa.selenium.By
 
-class TableModule extends Module{
+class TableModuleBase extends Module{
+    String статическийID=""
     static content = {
-        String статическийID=""
         Таблица(required: false) {$(By.xpath("//table[@id='$статическийID']"))}
         Колонки(required: false){Таблица.$(By.xpath("//thead/tr/th"))}
         Колонка(required: false){Integer номерКолонки->Колонки[номерКолонки] as Navigator}
