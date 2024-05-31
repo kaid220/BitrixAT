@@ -148,15 +148,13 @@ class Test1 extends BitrixSpec{
             page(ContactDetailsPage).Апплет_КарточкаКонтакта.Кнопка_ЗакрытьКарточку.click()
             sleep(3000)
         }
-        waitFor {at(ContactListPage).АпплетСписокКонтактов.Таблица.displayed}
+        waitFor {at(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed}
         logger.info("ОР: Вернулись на страницу со списком контактов")
         stepPassed=true
     }
 
     def "Шаг 14: Убедиться что число записей в списке контактов стало больше зафиксированного"(){
         given:
-        page(ContactDetailsPage).Апплет_КарточкаКонтакта.Кнопка_ЗакрытьКарточку.click()
-        waitFor {at(ContactListPage).АпплетСписокКонтактов.Таблица.displayed}
         for(int i=0;i<10 && at(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed;i++){
             waitFor { page(ContactListPage).ПанельИнструментовКонтакты.КнопкаСоздать.displayed}
             обновитьСтраницуБраузера()

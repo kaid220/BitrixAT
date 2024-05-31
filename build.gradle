@@ -51,7 +51,7 @@ dependencies {
 }
 
 test{ useJUnitPlatform()
-   maxParallelForks = 1
+   maxParallelForks = 3
 systemProperty('file.encoding','UTF-8')}
 
 

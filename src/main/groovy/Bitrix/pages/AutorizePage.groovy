@@ -11,5 +11,6 @@ class AutorizePage extends BitrixPage{
         Кнопка_Далее{$(By.xpath('//button[text()="Далее"]'))}
         СообщениеОНекорректностиПароля(required: false){$(By.xpath("//span[text()='Неверный логин или пароль.']"))}
         СообщениеОНекорректностиЛогина(required: false){$(By.xpath("//span[text()='Не удалось найти пользователя с таким e-mail']"))}
+        Поле_Капча(required: false){$(By.xpath("//input[@id='captcha-input']"))}
     }
 }

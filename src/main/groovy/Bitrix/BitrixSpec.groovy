@@ -97,7 +97,10 @@ class BitrixSpec extends GebSpec{
                 }
                 logger.info("Заполнили поле пароль")
                 Кнопка_Далее.click()
+                logger.info("Нажали на кнопку далее")
             }
+            sleep(3000)
+            assert !page(AutorizePage).Поле_Капча.displayed : "Появилась капча, необходимо корректно осуществить вход в систему с последующим корректным выходом"
             at DealPage
         }
         catch (Exception e){

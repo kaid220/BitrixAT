@@ -84,6 +84,8 @@ class Test2 extends BitrixSpec {
             Кнопка_Далее.click()
             logger.info("Нажали на кнопку Далее")
         }
+        sleep(3000)
+        assert !page(AutorizePage).Поле_Капча.displayed : "Появилась капча, необходимо корректно осуществить вход в систему с последующим корректным выходом"
         at DealPage
         logger.info("ОР: Авторизация прошла успешна, осуществлен переход на страницу 'Сделки'")
         stepPassed = true
