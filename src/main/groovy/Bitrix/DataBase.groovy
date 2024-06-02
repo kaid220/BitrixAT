@@ -28,7 +28,6 @@ class DataBase {
     }
 
     static boolean doDbScript(String query){
-        def result
         Statement sql
         Connection connection
         logger.info("sql: $query")

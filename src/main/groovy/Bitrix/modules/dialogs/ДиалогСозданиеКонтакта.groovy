@@ -4,13 +4,11 @@ import Bitrix.DialogBase
 import Bitrix.DropDownBase
 import org.openqa.selenium.By
 
-class ДиалогСозданияКонтакта extends DialogBase{
+class ДиалогСозданиеКонтакта extends DialogBase{
     static content ={
         IFrame{find(By.xpath("//div[@class='side-panel-content-container']/iframe"))}
         container{browser.find(By.xpath("//body//div[@class='crm-entity-card-container']"))}
-        Поле_Обращение{
-                module new DropDownBase(input: "data-cid='HONORIFIC'")
-        }
+        Поле_Обращение{module new DropDownBase(input: "data-cid='HONORIFIC'")}
         Поле_Фамилия{container.$(By.xpath("//input[@name='LAST_NAME']"))}
         Поле_Имя(required: false){container.$(By.xpath("//input[@name='NAME']"))}
         Поле_Отчество{container.$(By.xpath("//input[@name='SECOND_NAME']"))}

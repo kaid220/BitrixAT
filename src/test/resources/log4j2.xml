@@ -9,11 +9,11 @@
             <Column name="eventDate"  pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}"/>
             <Column name="level" pattern="%level"/>
             <Column name="logger" pattern="%logger"/>
-            <Column name="message" pattern="%message"/>
+            <Column name="message" pattern="%message%n%throwable"/>
         </JDBC>
     </Appenders>
     <Loggers>
-     <Root level="ALL">
+     <Root level="INFO">
          <AppenderRef ref="stdout"/>
          <AppenderRef ref="bitrixat"/>
     </Root>

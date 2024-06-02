@@ -3,10 +3,12 @@ package Bitrix
 import Bitrix.pages.AutorizePage
 import Bitrix.pages.DealPage
 import Bitrix.objects.Пользователь
+import geb.Browser
 import geb.spock.GebSpec
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.chrome.ChromeDriver
 import spock.lang.Shared
 
 import java.time.LocalDateTime
@@ -21,11 +23,11 @@ class BitrixSpec extends GebSpec{
     @Shared String датаЗапуска
     @Shared String датаОкончанияТеста
     @Shared Пользователь пользователь
+    @Shared boolean выполненВход
     def setupSpec(){
         logger = LogManager.getLogger(this.getClass())
         датаЗапуска = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))
         logger.info("Запущен тест: $запущенныйТест")
-        for(int i=0;i<10&&driver==null;i++)
         driver = getNewDriver()
         созданиеИлиОбновлениеЗаписиОТесте('start')
     }
@@ -35,13 +37,12 @@ class BitrixSpec extends GebSpec{
         stepPassed=false
     }
     def cleanupSpec(){
-        driver.close()
+       if(пользователь!=null) освободитьПользователя(пользователь)
+       if(выполненВход) выполнитьВыходИзБитрикс()
+        driver.quit()
         logger.info("Завершен тест: $запущенныйТест")
-        if(пользователь!=null) освободитьПользователя(пользователь)
          датаОкончанияТеста = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))
         созданиеИлиОбновлениеЗаписиОТесте('end')
-
-
     }
 
 
@@ -80,7 +81,6 @@ class BitrixSpec extends GebSpec{
 
     boolean выполнитьВходВБитрикс(String логин,String пароль){
         try {
-            if (!browser.driver) driver = getNewDriver()
             go 'https://b24-wqf2lv.bitrix24.ru'
             at(AutorizePage).with {
                 logger.info("Перешли на страницу авторизации")
@@ -102,6 +102,7 @@ class BitrixSpec extends GebSpec{
             sleep(3000)
             assert !page(AutorizePage).Поле_Капча.displayed : "Появилась капча, необходимо корректно осуществить вход в систему с последующим корректным выходом"
             at DealPage
+            выполненВход=true
         }
         catch (Exception e){
             e.printStackTrace()
@@ -149,7 +150,7 @@ class BitrixSpec extends GebSpec{
         logger.info("Получен пользователь '$логин'")
         String ключЛогина
         try {
-            ключЛогина = Config.properties.find {it->it.value=='xifural75@yandex.ru'}.getKey().toString()
+            ключЛогина = Config.properties.find {it->it.value==логин}.getKey().toString()
             String пароль = Config.getProperty("userPassword${ключЛогина.substring(ключЛогина.length()-1)}")
             пользователь = new Пользователь(логин,пароль)
             пользователь
@@ -167,5 +168,17 @@ class BitrixSpec extends GebSpec{
             throw new Exception("Значение isUse не было изменено на '0'")
     }
 
+    def выполнитьВыходИзБитрикс(){
+        logger.info("Осуществляется выход из 'Битрикс24'")
+        at(BitrixPage).with {
+            открытьМенюПрофиля
+            logger.info("Открылось меню профиля")
+            waitFor {КнопкаВыйти.displayed}
+            КнопкаВыйти.click()
+            logger.info("Нажата кнопка 'Выйти'")
+        }
+        at AutorizePage
+        logger.info("Выход осуществлен успещно")
+    }
 
 }
