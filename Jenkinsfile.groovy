@@ -31,23 +31,11 @@ pipeline {
                                         echo "Start all tests running"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
                                         junit stdioRetention: '', testResults: 'build\\test-results\\test\\*.xml'
-                                        allure([includeProperties: false, jdk: '', properties: []])
+                                       // allure([includeProperties: false, jdk: '', properties: []])
                                 }
                         }
                 }
-                /*stage('Run failed tests'){
 
-                        when{
-                                previousStageFailed()
-                        }
-                        steps {
-                                script {
-                                        echo "Run failed tests"
-                                        catchError(buildResult:'SUCCESS', stageResult: 'FAILURE'){  bat returnStdout: true, script: 'gradlew.bat failedTests'}
-                                        junit stdioRetention: '', testResults: 'build\\test-results\\test\\*.xml'
-                                }
-                        }
-                }*/
 
         }
         post{
