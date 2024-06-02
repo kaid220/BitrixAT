@@ -18,6 +18,8 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'idea'
+
+    id 'io.qameta.allure' version '2.8.1'
 }
 
 compileJava.options.encoding = 'UTF-8'
@@ -28,7 +30,10 @@ repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
-
+allure{
+    version '2.16.0'
+    autoconfigure = true
+}
 dependencies {
     // Use the latest Groovy version for building this library
     implementation 'org.apache.groovy:groovy:4.0.0'
@@ -47,7 +52,7 @@ dependencies {
     //use mySqlConnector
     implementation 'mysql:mysql-connector-java:8.0.11'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    //implementation 'io.qameta.allure:allure-spock:2.16.0'
+    testImplementation 'io.qameta.allure:allure-spock:2.16.0'
 }
 
 test{ useJUnitPlatform()
