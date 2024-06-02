@@ -46,7 +46,9 @@ environments{
     }
     else {
         def localBrowser = 'chrome'
-        System.setProperty("webdriver.chrome.driver", "D:\\ITTOOLS\\wd\\chromedriver.exe");
-        driver = { new ChromeDriver() }
+
+        driver = { System.setProperty("webdriver.chrome.driver", "D:\\ITTOOLS\\wd\\chromedriver.exe");
+            new ChromeDriver() }
     }
+    quitDriverMode = "AFTER_SPEC"
 }
