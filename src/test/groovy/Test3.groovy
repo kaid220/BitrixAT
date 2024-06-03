@@ -124,9 +124,9 @@ class Test3 extends BitrixSpec{
             sleep(5000)
         }
         waitFor { !page(CompanyListPage).АпплетСписокКомпаний.КнопкаПоказатьКоличество.displayed}
-        Integer новоеКолВоКонтактов = page(CompanyListPage).АпплетСписокКомпаний.ПолеКоличествоКомпаний.text().split(' ')[page(CompanyListPage).АпплетСписокКомпаний.ПолеКоличествоКомпаний.text().split(' ').size()-1] as Integer
-        assert колвоКомпаний<новоеКолВоКонтактов
-        logger.info("ОР: Количичество контактов увеличено")
+        Integer новоеКолВоКомпаний = page(CompanyListPage).АпплетСписокКомпаний.ПолеКоличествоКомпаний.text().split(' ')[page(CompanyListPage).АпплетСписокКомпаний.ПолеКоличествоКомпаний.text().split(' ').size()-1] as Integer
+        assert колвоКомпаний<новоеКолВоКомпаний
+        logger.info("ОР: Количичество компаний увеличено")
         stepPassed=true
     }
 }
