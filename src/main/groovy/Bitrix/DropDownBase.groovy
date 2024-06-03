@@ -13,8 +13,8 @@ class DropDownBase extends Module{
 
     static content = {
         container{$(By.xpath("//div[@$input]"))}
-        Поле(required: false) {container.$(By.xpath("//div[@class='ui-ctl-element']")).firstElement()}
-        dropdown{find(By.xpath("//div[contains(@class,'dropdown')]")).firstElement()}
+        Поле(required: false) {container.$(By.xpath(".//div[@class='ui-ctl-element']")).firstElement()}
+        dropdown{container.$(By.xpath(".//div[contains(@class,'dropdown')]")).firstElement()}
         Название{container.find(By.xpath("//label"))}
         Список(required:false){
             $(By.xpath("//div[contains(@style, 'display: block;')][contains(@id,'menu-popup')]"))

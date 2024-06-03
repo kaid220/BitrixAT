@@ -39,7 +39,6 @@ class BitrixSpec extends GebSpec{
     def cleanupSpec(){
        if(пользователь!=null) освободитьПользователя(пользователь)
        if(выполненВход) выполнитьВыходИзБитрикс()
-        driver.quit()
         logger.info("Завершен тест: $запущенныйТест")
          датаОкончанияТеста = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))
         созданиеИлиОбновлениеЗаписиОТесте('end')
