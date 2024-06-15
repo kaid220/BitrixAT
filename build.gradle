@@ -49,7 +49,12 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     //testImplementation 'io.qameta.allure:allure-spock:2.16.0'
 }
-
+tasks.withType(GroovyCompile){
+    options.encoding="UTF-8"
+}
+tasks.withType(JavaCompile){
+    options.encoding="UTF-8"
+}
 test{ useJUnitPlatform()
    maxParallelForks = 2
 systemProperty('file.encoding','UTF-8')

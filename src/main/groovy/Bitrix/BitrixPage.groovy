@@ -13,7 +13,6 @@ class BitrixPage extends Page{
         открытьМенюПрофиля{$('span.user-name').click()}
         КнопкаВыйти(required:false){$(By.xpath("//div[text()='Выйти']/parent::div/parent::*"))}
     }
-
 }
 
 

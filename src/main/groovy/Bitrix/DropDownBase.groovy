@@ -10,7 +10,6 @@ class DropDownBase extends Module{
      * испульзуется для поиска input элемента выпадающего списка
      */
     String input=''
-
     static content = {
         container{$(By.xpath("//div[@$input]"))}
         Поле(required: false) {container.$(By.xpath(".//div[@class='ui-ctl-element']")).firstElement()}
@@ -21,7 +20,6 @@ class DropDownBase extends Module{
         }
         ЭлементСпискаПоТексту{String текст->Список.$(By.xpath("//span//*[text()='$текст']"))}
     }
-
     @Override
     Object value(){
         String значениеПоля = waitFor {
@@ -38,15 +36,10 @@ class DropDownBase extends Module{
         Список.displayed}
             Список
     }
-
     def выбратьЭлемент(String название){
         открытьСписок()
-        waitFor {
-            ЭлементСпискаПоТексту(название).displayed
-        }
+        waitFor {ЭлементСпискаПоТексту(название).displayed}
         ЭлементСпискаПоТексту(название).click()
         assert Поле.text==название
     }
-
-
 }

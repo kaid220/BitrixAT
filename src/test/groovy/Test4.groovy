@@ -10,7 +10,7 @@ import spock.lang.Title
 
 import java.time.LocalDateTime
 
-@Title('Тест 4: Создание кампании')
+@Title('Тест 4: Создание товара')
 @Stepwise
 class Test4 extends BitrixSpec {
     def "Шаг 1: Выполнить вход в Битрикс24"() {

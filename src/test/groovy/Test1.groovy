@@ -14,14 +14,14 @@ import spock.lang.Title
 @Stepwise
 class Test1 extends BitrixSpec{
 
-    def "Шаг 1: Выполнить вход в Битрикс24"() {
+    def "Шаг 01: Выполнить вход в Битрикс24"() {
         given:
         пользователь = получитьСвободногоПользователя()
         выполнитьВходВБитрикс(пользователь)
         logger.info("ОР: Осуществлен вход в Битрикс24")
         stepPassed=true
     }
-    def "Шаг 2: Перейти по меню Клиенты - Контакты"(){
+    def "Шаг 02: Перейти по меню Клиенты - Контакты"(){
         given:
         перейтиПоМеню('Клиенты->Контакты')
         at ContactListPage
@@ -30,7 +30,7 @@ class Test1 extends BitrixSpec{
 
     }
     @Shared Integer колвоКонтактов
-    def "Шаг 3: Зафиксировать текущее количество контактов"(){
+    def "Шаг 03: Зафиксировать текущее количество контактов"(){
         given:
         waitFor {page(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed}
         for(int i=0;i<10 && at(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed;i++){
@@ -41,14 +41,15 @@ class Test1 extends BitrixSpec{
             sleep(5000)
             }
             waitFor { !page(ContactListPage).АпплетСписокКонтактов.КнопкаПоказатьКоличество.displayed}
-            колвоКонтактов = page(ContactListPage).АпплетСписокКонтактов.ПолеКоличествоКонтактов.text().split(' ')[page(ContactListPage).АпплетСписокКонтактов.ПолеКоличествоКонтактов.text().split(' ').size()-1] as Integer
+            колвоКонтактов = page(ContactListPage).АпплетСписокКонтактов.ПолеКоличествоКонтактов.text().split(' ')[page(ContactListPage).
+                    АпплетСписокКонтактов.ПолеКоличествоКонтактов.text().split(' ').size()-1] as Integer
             assert колвоКонтактов!=null
         logger.info("Количество контактов ='$колвоКонтактов'")
         logger.info("ОР: Значение зафиксированно")
         stepPassed=true
 
     }
-    def "Шаг 4: Нажать на кнопку 'Создать'"(){
+    def "Шаг 04: Нажать на кнопку 'Создать'"(){
         given:
         at(ContactListPage).ПанельИнструментовКонтакты.КнопкаСоздать.click()
         at ContactDetailsPage
@@ -58,7 +59,7 @@ class Test1 extends BitrixSpec{
 
     }
 
-    def "Шаг 5: Заполнить поле: Обращение"(){
+    def "Шаг 05: Заполнить поле: Обращение"(){
         given:
           at(ContactDetailsPage).Апплет_КарточкаКонтакта.Диалог_СозданиеКонтакта.with {
               withFrame(IFrame) {
@@ -70,7 +71,7 @@ class Test1 extends BitrixSpec{
 
     }
 
-    def "Шаг 6: Заполнить поле: Фамилия"(){
+    def "Шаг 06: Заполнить поле: Фамилия"(){
         given:
         page(ContactDetailsPage).Апплет_КарточкаКонтакта.Диалог_СозданиеКонтакта.with {
             заполнитьПолеФамилия()
@@ -80,7 +81,7 @@ class Test1 extends BitrixSpec{
 
     }
 
-    def "Шаг 7: Заполнить поле: Отчество"(){
+    def "Шаг 07: Заполнить поле: Отчество"(){
         given:
         at(ContactDetailsPage).Апплет_КарточкаКонтакта.Диалог_СозданиеКонтакта.with {
             заполнитьПолеОтчество()
@@ -90,7 +91,7 @@ class Test1 extends BitrixSpec{
 
     }
 
-    def "Шаг 8: Заполнить поле: Номер телефона"(){
+    def "Шаг 08: Заполнить поле: Номер телефона"(){
         given:
         page(ContactDetailsPage).Апплет_КарточкаКонтакта.Диалог_СозданиеКонтакта.with {
             заполнитьПолеНомерТелефона()
@@ -101,7 +102,7 @@ class Test1 extends BitrixSpec{
     }
 
 
-    def "Шаг 9: Заполнить поле: Дата Рождения"(){
+    def "Шаг 09: Заполнить поле: Дата Рождения"(){
         given:
         page(ContactDetailsPage).Апплет_КарточкаКонтакта.Диалог_СозданиеКонтакта.with {
             заполнитьПолеДатаРождения()

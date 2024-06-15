@@ -24,19 +24,15 @@ pipeline {
                                 }
                         }
                 }
-
                 stage('Run tests') {
                         steps {
                                 script {
                                         echo "Start all tests running"
                                         catchError(buildResult:'SUCCESS', stageResult: 'FAILURE') { bat returnStdout: true, script: 'gradlew.bat test'}
-                                       // junit stdioRetention: '', testResults: 'build\\test-results\\test\\*.xml'
 
                                 }
                         }
                 }
-
-
         }
         post{
                 always{

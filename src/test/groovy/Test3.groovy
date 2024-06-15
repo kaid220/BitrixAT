@@ -53,6 +53,8 @@ class Test3 extends BitrixSpec{
     }
     def "Шаг 5: Заполнить поле: Название"(){
         given:
+        обновитьСтраницуБраузера()
+        at CompanyDetailsPage
         at(CompanyDetailsPage).Апплет_КарточкаКомпании.Диалог_СозданиеКомпании.with {
             withFrame(IFrame) {
                 at(CompanyDetailsPage).Апплет_КарточкаКомпании.Диалог_СозданиеКомпании.заполнитьПолеНазвание('Тест3')
